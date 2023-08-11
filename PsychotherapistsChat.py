@@ -16,6 +16,7 @@ def role_setup(key):
         presence_penalty=0
         openning_statement = "Hello!"
         picture = "Eliza.bmp"
+        promptstamp = "Tell me about your pain"
         intro = "ELIZA is an early natural language processing computer program created from 1964 to 1966[1] at MIT by Joseph Weizenbaum. Created to explore communication between humans and machines, ELIZA simulated conversation by using a pattern matching and substitution methodology that gave users an illusion of understanding on the part of the program, but had no representation that could be considered really understanding what was being said by either party."
     elif key == 1:
         model = "gpt-3.5-turbo"
@@ -28,6 +29,7 @@ def role_setup(key):
         presence_penalty=0.5
         openning_statement = "Who are you and how can you help me?"
         picture = "Pris.bmp"
+        promptstamp = "Cry, baby, cry"
         intro = "Pris is a replicant, which is a bioengineered android that looks and acts like a human. She is a basic pleasure model, designed to provide entertainment and companionship, but here she's been redesigned to be a very boring and self centered freudian psychoterapist."
     elif key == 2:
         model = "gpt-3.5-turbo"
@@ -40,6 +42,7 @@ def role_setup(key):
         presence_penalty=0.5
         openning_statement = "Who are you and how can you help me?"
         picture = "Marv.bmp"
+        promptstamp = "Life? Don´t talk to me about life!"
         intro = "Marvin the Paranoid Android is a fictional character in The Hitchhiker's Guide to the Galaxy series by Douglas Adams. Marvin is the ship's robot aboard the starship Heart of Gold. Originally built as one of many failed prototypes of Sirius Cybernetics Corporation's GPP (Genuine People Personalities) technology, Marvin is afflicted with severe depression and boredom, in part because he has a 'brain the size of a planet' which he is seldom, if ever, given the chance to use."
     else:
         model = "gpt-3.5-turbo"
@@ -52,8 +55,9 @@ def role_setup(key):
         presence_penalty=1
         openning_statement = "Quem é você e como pode me ajudar?"
         picture = "Analista.bmp"
+        promptstamp = "Desembuxa logo, GALO VELHO!"
         intro = "Mais ortodoxo que pomada Minâncora, sua técnica do joelhaço é bastante heterodoxa, a depender do ponto de vista. Ela está baseada no princípio da dor maior, isto é, quando o paciente vem se queixar de suas dores subjetivas, o joelhaço aplicado no local correto oferece ao sujeito a vivência de uma dor tão mais intensa que faz com que se esqueça das dores 'menores'."
-    return model, system_content, avatar, temperature, max_tokens, top_p, frequency_penalty, presence_penalty, openning_statement, picture, intro
+    return model, system_content, avatar, temperature, max_tokens, top_p, frequency_penalty, presence_penalty, openning_statement, picture, intro, promptstamp
 
 def update_assistant(old, new):
     if len(old) <= ASSISTENT_MEMORY:
@@ -80,7 +84,7 @@ if st.session_state.persona != int(psycho[0]):
         
 
 # SETUP MODEL FOR PERSONA
-model, system_content, avatar, temperature, max_tokens, top_p, frequency_penalty, presence_penalty, openning_statement, picture, intro = role_setup(st.session_state.persona)
+model, system_content, avatar, temperature, max_tokens, top_p, frequency_penalty, presence_penalty, openning_statement, picture, intro, promptstamp = role_setup(st.session_state.persona)
 
 
 # FIXED SITE HEADER
@@ -135,7 +139,7 @@ if OPENAI_API_KEY:
                 st.markdown(message["content"])
 
     # React to user input
-    if prompt := st.chat_input("Desembuxa logo, GALO VELHO!"):
+    if prompt := st.chat_input(promptstamp):
         # Display user message in chat message container
         with st.chat_message("User", avatar="😟"):
             st.write(prompt)
