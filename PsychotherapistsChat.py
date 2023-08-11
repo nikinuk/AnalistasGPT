@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 import openai
-ASSISTENT_MEMORY = 10 #defines how mani chat iterations is kept in the "assistent" role for context
+ASSISTENT_MEMORY = 10 #defines how many chat iterations is kept in the "assistent" role for context
 
 # DEFINES THE ROLE FOR THE CHAT ENGINE (yes, it is ludicrous, i take it)
 def role_setup(key):
@@ -60,6 +60,7 @@ def role_setup(key):
     return model, system_content, avatar, temperature, max_tokens, top_p, frequency_penalty, presence_penalty, openning_statement, picture, intro, promptstamp
 
 def update_assistant(old, new):
+    # Adds new "assistent" entries in the chat context, limited by choosen ASSISTENT_MEMORY
     if len(old) <= ASSISTENT_MEMORY:
         old = old + [ { "role": "assistant", "content": new } ]
     else:
@@ -69,25 +70,24 @@ def update_assistant(old, new):
 # GET API KEY
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
-# CHOOSE ROLES
+# CHOOSE ROLES - on side bar, radio buttond
 psycho = st.sidebar.radio(
     "Please choose you therapist for the day:",
     ('0- ELISA', '1- ELISA 3.5 turbo', '2- Marvin, the Paranoid Android', '3- O Analista de Bagé')
     )
-if "persona" not in st.session_state:
+if "persona" not in st.session_state: # initialize state
         st.session_state.persona = int(psycho[0])
 
-if st.session_state.persona != int(psycho[0]):
+if st.session_state.persona != int(psycho[0]):  # when the persona changes, reset messages 
         # RESET MESSAGES 
         del st.session_state.messages
         st.session_state.persona = int(psycho[0])
         
-
 # SETUP MODEL FOR PERSONA
 model, system_content, avatar, temperature, max_tokens, top_p, frequency_penalty, presence_penalty, openning_statement, picture, intro, promptstamp = role_setup(st.session_state.persona)
 
 # point tô the differnt persona
-st.write("⬅️⬅️⬅️ check out the diferent therapists available on sidebar")
+st.write("⬅ check out the diferent therapists available on sidebar")
 
 # FIXED SITE HEADER
 col1, col2 = st.columns([0.2,0.8])
@@ -100,19 +100,15 @@ with col2:
     st.title(psycho[3:])
     st.write(intro)
 
-
-
 # IF KEY IS AVAILABLE
-
 if OPENAI_API_KEY:
-
     openai.api_key = OPENAI_API_KEY 
 
     # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
-        # Iniciar terapia com boas vindas do analista
-                
+        st.session_state.gpt_assistant = []
+        # Iniciar terapia com boas vindas do analista - run GPT
         completion = openai.ChatCompletion.create(
                     model=model,
                     messages = [ { "role": "system",
@@ -131,9 +127,9 @@ if OPENAI_API_KEY:
             st.markdown(chat_response)
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": chat_response})
-        st.session_state.gpt_assistant = []
         st.session_state.gpt_assistant = update_assistant(st.session_state.gpt_assistant, chat_response)
-
+   
+    # populate chat screen
     else:
         # Display chat messages from history on app rerun
         for message in st.session_state.messages:
@@ -147,7 +143,7 @@ if OPENAI_API_KEY:
             st.write(prompt)
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
-        
+        # RUN GPT
         completion = openai.ChatCompletion.create(
                     model=model,
                     messages = [ { "role": "system",
@@ -167,7 +163,7 @@ if OPENAI_API_KEY:
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": chat_response})
         st.session_state.gpt_assistant = update_assistant(st.session_state.gpt_assistant, chat_response)
-
+# in case API key unavailable
 else:
     with st.chat_message("Assistant", avatar="AnalistaSmall.png"):
-        st.markdown("Mas baaahhhh che !!! Tais querendo que eu te dê de lambuja a única coisa que tenho pra vender? Põe tua chave do apêí aí do lado que já começamos a consulta!")
+        st.markdown("please provide API key to start your therapy")
