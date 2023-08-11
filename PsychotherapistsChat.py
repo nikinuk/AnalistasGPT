@@ -86,6 +86,8 @@ if st.session_state.persona != int(psycho[0]):
 # SETUP MODEL FOR PERSONA
 model, system_content, avatar, temperature, max_tokens, top_p, frequency_penalty, presence_penalty, openning_statement, picture, intro, promptstamp = role_setup(st.session_state.persona)
 
+# point tô the differnt persona
+st.write("⬅️⬅️⬅️ check out the diferent therapists available on sidebar")
 
 # FIXED SITE HEADER
 col1, col2 = st.columns([0.2,0.8])
