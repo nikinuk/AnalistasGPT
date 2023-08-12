@@ -50,7 +50,8 @@ if "persona" not in st.session_state: # initialize state
 
 if st.session_state.persona != psycho:  # when the persona changes, reset messages 
         # RESET MESSAGES 
-        del st.session_state.messages
+        if "messages" in st.session_state:
+            del st.session_state.messages
         st.session_state.persona = psycho
         
 # SETUP MODEL FOR PERSONA
