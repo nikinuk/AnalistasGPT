@@ -14,7 +14,7 @@ def update_assistant(old, new):
     return old
 
 autentication_type = st.sidebar.radio(
-    "Please choose autentication type:",
+    "Choose autentication type:",
     ("password", "my own OPENAI_API_KEY")
     )
 if "autentication_type" not in st.session_state:
@@ -41,7 +41,7 @@ if "personas" not in st.session_state:
 p = st.session_state.personas
 # CHOOSE ROLES - on side bar, radio buttond
 psycho = st.sidebar.radio(
-    "Please choose you therapist for the day:",
+    "Choose you therapist for the day:",
     st.session_state.names
     )
 psycho = str(st.session_state.names.index(psycho))
@@ -137,4 +137,4 @@ if OPENAI_API_KEY:
 # in case API key unavailable
 else:
     with st.chat_message("Assistant", avatar="🤖"):
-        st.markdown("please provide API key to start your therapy")
+        st.markdown("please provide a valid password or a valid OPENAI API key to start your therapy")
