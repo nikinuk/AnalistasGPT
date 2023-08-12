@@ -22,10 +22,11 @@ autentication_type = st.sidebar.radio(
     "Choose autentication type:",
     ("password", "my own OPENAI_API_KEY")
     )
-if "autentication_type" not in st.session_state:
-    st.session_state.autentication_type = autentication_type
+if "autentication" not in st.session_state:
+    st.session_state.autentication = autentication_type
+st.session_state.autentication = autentication_type
 pwd = st.sidebar.text_input("type your password or APY key", type="password")
-if st.session_state.autentication_type == "password":
+if st.session_state.autentication == "password":
     if pwd == st.secrets["PASSWORD"]:
         OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 else:
