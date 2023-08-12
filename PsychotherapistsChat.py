@@ -13,7 +13,7 @@ def update_assistant(old, new):
         old = old.pop(0) + [ { "role": "assistant", "content": new } ] 
     return old
 def set_avatar(user):
-    if user = "user":
+    if user == "user":
         return "😟"
     else:
         return p[psycho]["avatar"]
