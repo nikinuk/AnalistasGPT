@@ -12,6 +12,11 @@ def update_assistant(old, new):
     else:
         old = old.pop(0) + [ { "role": "assistant", "content": new } ] 
     return old
+def set_avatar(user):
+    if user = "user":
+        return "😟"
+    else:
+        return p[psycho]["avatar"]
 
 autentication_type = st.sidebar.radio(
     "Choose autentication type:",
