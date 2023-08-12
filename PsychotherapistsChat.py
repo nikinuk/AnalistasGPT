@@ -3,6 +3,7 @@ from PIL import Image
 import openai
 import json
 ASSISTENT_MEMORY = 10 #defines how many chat iterations is kept in the "assistent" role for context
+OPENAI_API_KEY = ""
 
 def update_assistant(old, new):
     # Adds new "assistent" entries in the chat context, limited by choosen ASSISTENT_MEMORY
