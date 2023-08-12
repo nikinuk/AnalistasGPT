@@ -28,7 +28,7 @@ else:
 #LOAD persona list
 if "personas" not in st.session_state:
     # Opening JSON file
-    with open('personas.json', 'r') as openfile:
+    with open('personas.json', encoding='utf-8') as openfile:
         # Reading from json file
         p = json.load(openfile)
     #Create radio buttons
