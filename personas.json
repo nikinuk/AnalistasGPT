@@ -12,7 +12,7 @@
         "openning_statement": "hello",
         "picture": "Eliza.bmp",
         "promptstamp": "Tell me about your pain",
-        "intro": "ELIZA is an early natural language processing computer program created from 1964 to 1966[1] at MIT by Joseph Weizenbaum. Created to explore communication between humans and machines, ELIZA simulated conversation by using a pattern matching and substitution methodology that gave users an illusion of understanding on the part of the program, but had no representation that could be considered really understanding what was being said by either party."
+        "intro": "ELIZA is an early natural language processing computer program created from 1964 to 1966 at MIT by Joseph Weizenbaum. Created to explore communication between humans and machines, ELIZA simulated conversation by using a pattern matching and substitution methodology that gave users an illusion of understanding on the part of the program, but had no representation that could be considered really understanding what was being said by either party."
 	},
 "1": {
         "name": "ELIZA 3.5 turbo",
