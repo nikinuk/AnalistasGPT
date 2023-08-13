@@ -59,11 +59,22 @@ if st.session_state.persona != psycho:  # when the persona changes, reset messag
         if "messages" in st.session_state:
             del st.session_state.messages
         st.session_state.persona = psycho
-        
-# SETUP MODEL FOR PERSONA
-#model, system_content, avatar, temperature, max_tokens, top_p, frequency_penalty, presence_penalty, openning_statement, picture, intro, promptstamp = role_setup(st.session_state.persona)
 
-# point tô the differnt persona
+#Credits 
+nikinuk = Image.open("nikinuk.png")
+i2a2 = Image.open("i2a2.jpg")
+oai = Image.open("OIP.jpg")
+sml = Image.open("stm.jpg")
+st.sidebar.write("##\n##")
+
+cr1, cr2, cr3, cr4 = st.sidebar.columns(4)
+cr1.image(nikinuk, width=40)
+cr2.image(i2a2, width=40)
+cr3.image(oai, width=40)
+cr4.image(sml, width=40)
+st.sidebar.write("*Psycho Clinic by [Nich Arand](https://www.linkedin.com/in/nicholas-arand-233a911/)* \n *Dominando Redes Generativas [i2a2](https://www.i2a2.academy/dominando-redes-generativas)* \n *Powered by [OPENAI_GPT3.5 turbo](https://openai.com/)* \n *Hosted by [Streamlit](https://streamlit.io/)*")
+
+#MAIN PAGE
 st.write("⬅ check out the diferent therapists available on sidebar")
 
 # FIXED SITE HEADER
@@ -85,6 +96,7 @@ if OPENAI_API_KEY:
     if "messages" not in st.session_state:
         st.session_state.messages = []
         st.session_state.gpt_assistant = []
+
         # Iniciar terapia com boas vindas do analista - run GPT
         completion = openai.ChatCompletion.create(
                     model=p[psycho]["model"],
@@ -106,7 +118,7 @@ if OPENAI_API_KEY:
         st.session_state.messages.append({"role": "assistant", "content": chat_response})
         st.session_state.gpt_assistant = update_assistant(st.session_state.gpt_assistant, chat_response)
    
-    # populate chat screen
+    # populate chat screen after first iteration
     else:
         # Display chat messages from history on app rerun
         for message in st.session_state.messages:
