@@ -72,7 +72,7 @@ cr1.image(nikinuk, width=40)
 cr2.image(i2a2, width=40)
 cr3.image(oai, width=40)
 cr4.image(sml, width=40)
-st.sidebar.write("*Psycho Clinic by [Nich Arand](https://www.linkedin.com/in/nicholas-arand-233a911/)* \n *Dominando Redes Generativas [i2a2](https://www.i2a2.academy/dominando-redes-generativas)* \n *Powered by [OPENAI_GPT3.5 turbo](https://openai.com/)* \n *Hosted by [Streamlit](https://streamlit.io/)*")
+st.sidebar.write("*-Psycho Clinic by [Nich Arand](https://www.linkedin.com/in/nicholas-arand-233a911/)* \n *-Dominando Redes Generativas [i2a2](https://www.i2a2.academy/dominando-redes-generativas)* \n *-Powered by [OPENAI_GPT3.5 turbo](https://openai.com/)* \n *-Hosted by [Streamlit](https://streamlit.io/)*")
 
 #MAIN PAGE
 st.write("⬅ check out the diferent therapists available on sidebar")
