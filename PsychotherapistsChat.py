@@ -154,4 +154,4 @@ if OPENAI_API_KEY:
 # in case API key unavailable
 else:
     with st.chat_message("Assistant", avatar="🤖"):
-        st.markdown("please provide a valid password or a valid OPENAI API key to start your therapy")
+        st.markdown("please provide a valid password or a valid OPENAI API key to start your therapy - *see sidebar on '>' top left screen*")
