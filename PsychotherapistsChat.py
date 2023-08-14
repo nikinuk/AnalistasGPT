@@ -7,10 +7,9 @@ OPENAI_API_KEY = ""
 
 def update_assistant(old, new):
     # Adds new "assistent" entries in the chat context, limited by choosen ASSISTENT_MEMORY
-    if len(old) <= ASSISTENT_MEMORY:
-        old = old + [ { "role": "assistant", "content": new } ]
-    else:
-        old = old.pop(0) + [ { "role": "assistant", "content": new } ] 
+    if len(old) > ASSISTENT_MEMORY:
+        old.pop(0)
+    old = old + [ { "role": "assistant", "content": new } ] 
     return old
 def set_avatar(user):
     if user == "user":
