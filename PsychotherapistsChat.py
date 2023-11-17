@@ -1,6 +1,6 @@
 import streamlit as st
 from PIL import Image
-import openai
+from openai import OpenAI
 import json
 ASSISTENT_MEMORY = 10 #defines how many chat iterations is kept in the "assistent" role for context
 OPENAI_API_KEY = ""
@@ -89,7 +89,7 @@ with col2:
 
 # IF KEY IS AVAILABLE
 if OPENAI_API_KEY:
-    openai.api_key = OPENAI_API_KEY 
+    client = OpenAI(api_key=os.environ['OPENAI_API_KEY'], )
 
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -97,7 +97,7 @@ if OPENAI_API_KEY:
         st.session_state.gpt_assistant = []
 
         # Iniciar terapia com boas vindas do analista - run GPT
-        completion = openai.ChatCompletion.create(
+        completion = client.ChatCompletion.create(
                     model=p[psycho]["model"],
                     messages = [ { "role": "system",
                                   "content": p[psycho]["system_content"]
@@ -132,7 +132,7 @@ if OPENAI_API_KEY:
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
         # RUN GPT
-        completion = openai.ChatCompletion.create(
+        completion = client.ChatCompletion.create(
                     model=p[psycho]["model"],
                     messages = [ { "role": "system",
                                   "content": p[psycho]["system_content"]
