@@ -89,7 +89,7 @@ with col2:
 
 # IF KEY IS AVAILABLE
 if OPENAI_API_KEY:
-    client = OpenAI(api_key=os.environ['OPENAI_API_KEY'], )
+    client = OpenAI(api_key = OPENAI_API_KEY)
 
     # Initialize chat history
     if "messages" not in st.session_state:
