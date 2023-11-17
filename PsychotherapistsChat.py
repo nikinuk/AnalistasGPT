@@ -97,7 +97,7 @@ if OPENAI_API_KEY:
         st.session_state.gpt_assistant = []
 
         # Iniciar terapia com boas vindas do analista - run GPT
-        completion = client.ChatCompletion.create(
+        completion = client.chat.completions.create(
                     model=p[psycho]["model"],
                     messages = [ { "role": "system",
                                   "content": p[psycho]["system_content"]
@@ -132,7 +132,7 @@ if OPENAI_API_KEY:
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
         # RUN GPT
-        completion = client.ChatCompletion.create(
+        completion = client.chat.completions.create(
                     model=p[psycho]["model"],
                     messages = [ { "role": "system",
                                   "content": p[psycho]["system_content"]
