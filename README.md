@@ -7,3 +7,5 @@ Built with Streamlit front-end, this site emulates diferent psychotherapists. Th
 - Pris, the self confident replicant from BLADE RUNNER
 - Marvin, the Paranoid Android from the Hichiker's Guide to the Galaxy
 - O Analista de Bagé, the rude south-brazilian shrink character from Luis Fernando Veríssimo (portuguese)
+
+You can try it on https://psychotherapists.streamlit.app/
